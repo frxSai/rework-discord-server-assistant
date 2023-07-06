@@ -13,6 +13,8 @@ from datetime import datetime, timedelta
 import requests
 from lxml import etree
 import aiohttp
+import subprocess
+import re
 
 import aiohttp
 import discord
