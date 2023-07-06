@@ -17,6 +17,11 @@ for line in output_lines:
         value = match.group(2)
         server_info[key] = value
 
+name = server_info.get("NAME", "")
+players = server_info.get("PLAYERS", "")
+max_players = server_info.get("MAXPLAYERS", "")
+ping = server_info.get("PING", "")
+
 # Combine the extracted fields into a single string
 server_info_string = "Server Name: {}, Number of Players: {}, Maximum Players: {}, Ping: {}".format(
     server_info.get("NAME", ""),
