@@ -156,66 +156,79 @@ class General(commands.Cog, name="general"):
         await asyncio.sleep(2)
         await bot_response.delete()
 
-    @commands.hybrid_command(
-        name="status",
-        description="Check if the bot is alive.",
-    )
+    @commands.command(name="status", description="Check server status.")
     @checks.not_blacklisted()
-    async def status(self, context: Context) -> None:
-        url = "https://www.battlemetrics.com/servers/dayz/21395315"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                content = await response.text()
+    async def status(self, context: commands.Context):
+        go_command = ['go', 'run', '.\\steamserverinfo.go', '103.152.197.191', '2303']
+        result = subprocess.run(go_command, capture_output=True, text=True)
+        output_lines = result.stdout.strip().split('\n')
+        server_info = {}
+        for line in output_lines:
+            match = re.search(r'(\w+): (.+)', line)
+            if match:
+                key = match.group(1)
+                value = match.group(2)
+                server_info[key] = value
 
-        parser = etree.HTMLParser()
-        tree = etree.fromstring(content, parser)
+        name = server_info.get("NAME", "")
+        players = server_info.get("PLAYERS", "")
+        max_players = server_info.get("MAXPLAYERS", "")
+        game_map = server_info.get("MAP", "")
+        bots = server_info.get("BOTS", "")
+        ping = server_info.get("PING", "")
 
-        server_name = tree.xpath('//*[@id="serverPage"]/h2/text()')
-        server_players = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/dl/dd[2]/text()')
-        server_ip = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/dl/dd[3]/span[2]/text()')
-        server_status = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/dl/dd[4]/text()')
-        server_time = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/div/dl/dd[1]/text()')
-
-        if server_players and server_ip and server_status and server_name and server_time:
-            result_name = server_name[0].strip()
-            result_ip = server_ip[0].strip()
-            result_players = server_players[0].strip()
-            result_status = server_status[0].strip()
-            result_time = server_time[0].strip()
-        else:
-            print("Not found.")
-            return
         embed = discord.Embed(
-            title=result_name,
-            description=f"Status: {result_status} with {result_players}",
+            title='Server Info',
+            description=f"Server {name}",
             color=0xE02B2B
         )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/icons/755342613283864577/a_3441ffd239040b7def59d6f34e1a51d2.webp")
         embed.add_field(
-            name="Time",
-            value=f"{result_time}"
+            name="Players",
+            value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)'
         )
+        embed.add_field(
+            name="Latency",
+            value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/21395315)'
+        )
+        embed.add_field(
+            name="Map",
+            value=f'{game_map}'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+
         await context.message.delete()
         bot_response = await context.send(embed=embed)
-        while True:
-            await asyncio.sleep(5)
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url) as response:
-                    content = await response.text()
-            tree = etree.fromstring(content, parser)
-            updated_server_status = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/dl/dd[4]/text()')
-            updated_server_players = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/dl/dd[2]/text()')
-            updated_server_time = tree.xpath('//*[@id="serverPage"]/div[1]/div[1]/div/dl/dd[1]/text()')
-            if updated_server_status and updated_server_players:
-                updated_status = updated_server_status[0].strip()
-                updated_players = updated_server_players[0].strip()
-                updated_time = updated_server_time[0].strip()
-            else:
-                print("Not found.")
-                continue
-            embed.description = f"Status: {updated_status} with {updated_players}"
-            embed.set_field_at(index=0, name="Time", value=updated_time)
-            await bot_response.edit(embed=embed)
 
+        while True:
+            await asyncio.sleep(2)
+            result = subprocess.run(go_command, capture_output=True, text=True)
+            output_lines = result.stdout.strip().split('\n')
+            server_info = {}
+            for line in output_lines:
+                match = re.search(r'(\w+): (.+)', line)
+                if match:
+                    key = match.group(1)
+                    value = match.group(2)
+                    server_info[key] = value
+
+            name = server_info.get("NAME", "")
+            players = server_info.get("PLAYERS", "")
+            max_players = server_info.get("MAXPLAYERS", "")
+            game_map = server_info.get("MAP", "")
+            bots = server_info.get("BOTS", "")
+            ping = server_info.get("PING", "")
+
+            embed.description = f"Server {name}"
+            embed.set_field_at(index=0, name="PLayers", value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)')
+            embed.set_field_at(index=1, name="Latency", value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/21395315)')
+            embed.set_field_at(index=2, name="Map", value=f'{game_map}')
+            embed.set_footer(
+                text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+            )
+            await bot_response.edit(embed=embed)
 
     @commands.hybrid_command(
         name="restart",

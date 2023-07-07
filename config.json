@@ -1,8 +1,8 @@
 {
-  "prefix": "!",
-  "token": "MTEyNjAzMTI5Nzk3MDcxNjY4Mw.GMNKAr.WuJYjM6BiUlBNAnSol5UFGnW6sHjQGTRVDKS8w",
+  "prefix": "/",
+  "token": "token",
   "permissions": "8",
-  "application_id": "1126031297970716683",
+  "application_id": "1126702005377835069",
   "sync_commands_globally": false,
   "owners": [
     241476052810072065
