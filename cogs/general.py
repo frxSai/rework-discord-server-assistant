@@ -156,10 +156,151 @@ class General(commands.Cog, name="general"):
         await asyncio.sleep(2)
         await bot_response.delete()
 
+    @commands.hybrid_command(
+        name="chart_a",
+        description="Check if the bot is alive.",
+    )
+    @checks.not_blacklisted()
+    async def chart(self, context: Context) -> None:
+        """
+        Check if the bot is alive.
+
+        :param context: The hybrid command context.
+        """
+        embed = discord.Embed(
+            title=f'Rearmed',
+            description=f'Rearmed Ammo small/medium [chart](https://docs.google.com/spreadsheets/d/1t2FD7XWAgDn9Kou91uqm88OJTZwMS0vi-MUDGQXFdpE/edit#gid=0)',
+            color=0xE02B2B
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'556x45mm\n545x39mm\n762x54mm\n.308 Win\n762x39mm\n9x39mm'
+        )
+        embed.add_field(
+            name="Health",
+            value=f'100\n115\n150\n150\n110\n75'
+        )
+        embed.add_field(
+            name="Blood",
+            value=f'100\n100\n100\n100\n100\n100'
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'556x45mm\n545x39mm\n762x54mm\n.308 Win\n762x39mm\n9x39mm'
+        )
+        embed.add_field(
+            name="Shock",
+            value=f'110\n115\n150\n150\n110\n75'
+        )
+        embed.add_field(
+            name="Muzzle Velocity (m/s)",
+            value=f'850 m/s\n880 m/s\n865 m/s\n770 m/s\n640 m/s\n400 m/s'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+        # await context.send(embed=embed)
+        await context.message.delete()
+        await context.send(embed=embed)
+
+    @commands.hybrid_command(
+        name="chart_b",
+        description="Check if the bot is alive.",
+    )
+    @checks.not_blacklisted()
+    async def chart_b(self, context: Context) -> None:
+        """
+        Check if the bot is alive.
+
+        :param context: The hybrid command context.
+        """
+        embed = discord.Embed(
+            title=f'Rearmed',
+            description=f'Rearmed Ammo Heavy [chart](https://docs.google.com/spreadsheets/d/1t2FD7XWAgDn9Kou91uqm88OJTZwMS0vi-MUDGQXFdpE/edit#gid=0)',
+            color=0xE02B2B
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'.338 Lapua Magnum\n.408 Cheyenne Tactical\n12.7×99mm NATO\nRPG Rocket\n40mm Explosive Round\n40mm Smoke Round\nM4 Grenade'
+        )
+        embed.add_field(
+            name="Health",
+            value=f'275\n1500\n1200\n150\n110\n110\n99'
+        )
+        embed.add_field(
+            name="Blood",
+            value=f'1500\n1500\n1500\n100\n100\n100\n100'
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'.338 Lapua Magnum\n.408 Cheyenne Tactical\n12.7×99mm NATO\nRPG Rocket\n40mm Explosive Round\n40mm Smoke Round\nM4 Grenade'
+        )
+        embed.add_field(
+            name="Shock",
+            value=f'350\n400\n400\n0\n110\n110\n0'
+        )
+        embed.add_field(
+            name="Muzzle Velocity (m/s)",
+            value=f'880 m/s\n925 m/s\n982 m/s\n180 m/s\n76 m/s\n76 m/s\n3 m/s'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+        # await context.send(embed=embed)
+        await context.message.delete()
+        await context.send(embed=embed)
+
+    @commands.hybrid_command(
+        name="chart_c",
+        description="Check if the bot is alive.",
+    )
+    @checks.not_blacklisted()
+    async def chart_c(self, context: Context) -> None:
+        """
+        Check if the bot is alive.
+
+        :param context: The hybrid command context.
+        """
+        embed = discord.Embed(
+            title=f'Rearmed',
+            description=f'Rearmed Ammo shortgun/pistol [chart](https://docs.google.com/spreadsheets/d/1t2FD7XWAgDn9Kou91uqm88OJTZwMS0vi-MUDGQXFdpE/edit#gid=0)',
+            color=0xE02B2B
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'12 Gauge Slug\n12 Gauge Rubber Slug\n12 Gauge Bean Bag\n.45 ACP\n.357 Magnum\n9x19mm\n.380 ACP\n.22 LR'
+        )
+        embed.add_field(
+            name="Health",
+            value=f'150\n0\n0\n70\n65\n50\n35\n20'
+        )
+        embed.add_field(
+            name="Blood",
+            value=f'100\n0\n0\n100\n100\n100\n100\n100'
+        )
+        embed.add_field(
+            name="Ammo type",
+            value=f'12 Gauge Slug\n12 Gauge Rubber Slug\n12 Gauge Bean Bag\n.45 ACP\n.357 Magnum\n9x19mm\n.380 ACP\n.22 LR'
+        )
+        embed.add_field(
+            name="Shock",
+            value=f'150\n150\n100\n40\n90\n40\n35\n20'
+        )
+        embed.add_field(
+            name="Muzzle Velocity (m/s)",
+            value=f'380 m/s\n60 m/s\n240 m/s\n285 m/s\n440 m/s\n457 m/s\n300 m/s\n370 m/s'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+        # await context.send(embed=embed)
+        await context.message.delete()
+        await context.send(embed=embed)
+
     @commands.command(name="rearmed", description="Check server status.")
     @checks.not_blacklisted()
     async def rearmed(self, context: commands.Context):
-        go_command = ['go', 'run', './steamserverinfo.go', '103.152.197.191', '2303']
+        go_command = ['go', 'run', '.\\steamserverinfo.go', '103.152.197.191', '2303']
         result = subprocess.run(go_command, capture_output=True, text=True)
         output_lines = result.stdout.strip().split('\n')
         server_info = {}
@@ -233,7 +374,7 @@ class General(commands.Cog, name="general"):
     @commands.command(name="skvad", description="Check server status.")
     @checks.not_blacklisted()
     async def skvad(self, context: commands.Context):
-        go_command = ['go', 'run', './steamserverinfo.go', '193.25.252.92', '27016']
+        go_command = ['go', 'run', '.\\steamserverinfo.go', '193.25.252.92', '27016']
         result = subprocess.run(go_command, capture_output=True, text=True)
         output_lines = result.stdout.strip().split('\n')
         server_info = {}
