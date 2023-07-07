@@ -259,11 +259,11 @@ class General(commands.Cog, name="general"):
         embed.set_thumbnail(url="https://cdn.discordapp.com/icons/555449815387996171/8f89400a369c987261c6f400a0071091.webp?")
         embed.add_field(
             name="Players",
-            value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)'
+            value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/16264110)'
         )
         embed.add_field(
             name="Latency",
-            value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/21395315)'
+            value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/16264110)'
         )
         embed.add_field(
             name="Map",
