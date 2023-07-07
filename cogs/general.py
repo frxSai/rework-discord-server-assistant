@@ -156,10 +156,10 @@ class General(commands.Cog, name="general"):
         await asyncio.sleep(2)
         await bot_response.delete()
 
-    @commands.command(name="status", description="Check server status.")
+    @commands.command(name="rearmed", description="Check server status.")
     @checks.not_blacklisted()
-    async def status(self, context: commands.Context):
-        go_command = ['go', 'run', '.\\steamserverinfo.go', '103.152.197.191', '2303']
+    async def rearmed(self, context: commands.Context):
+        go_command = ['go', 'run', './steamserverinfo.go', '103.152.197.191', '2303']
         result = subprocess.run(go_command, capture_output=True, text=True)
         output_lines = result.stdout.strip().split('\n')
         server_info = {}
@@ -183,6 +183,80 @@ class General(commands.Cog, name="general"):
             color=0xE02B2B
         )
         embed.set_thumbnail(url="https://cdn.discordapp.com/icons/755342613283864577/a_3441ffd239040b7def59d6f34e1a51d2.webp")
+        embed.add_field(
+            name="Players",
+            value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)'
+        )
+        embed.add_field(
+            name="Latency",
+            value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/21395315)'
+        )
+        embed.add_field(
+            name="Map",
+            value=f'{game_map}'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+
+        await context.message.delete()
+        bot_response = await context.send(embed=embed)
+
+        while True:
+            await asyncio.sleep(2)
+            result = subprocess.run(go_command, capture_output=True, text=True)
+            output_lines = result.stdout.strip().split('\n')
+            server_info = {}
+            for line in output_lines:
+                match = re.search(r'(\w+): (.+)', line)
+                if match:
+                    key = match.group(1)
+                    value = match.group(2)
+                    server_info[key] = value
+
+            name = server_info.get("NAME", "")
+            players = server_info.get("PLAYERS", "")
+            max_players = server_info.get("MAXPLAYERS", "")
+            game_map = server_info.get("MAP", "")
+            bots = server_info.get("BOTS", "")
+            ping = server_info.get("PING", "")
+
+            embed.description = f"Server {name}"
+            embed.set_field_at(index=0, name="PLayers", value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)')
+            embed.set_field_at(index=1, name="Latency", value=f'Ping [{ping} ms](https://www.battlemetrics.com/servers/dayz/21395315)')
+            embed.set_field_at(index=2, name="Map", value=f'{game_map}')
+            embed.set_footer(
+                text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+            )
+            await bot_response.edit(embed=embed)
+
+    @commands.command(name="skvad", description="Check server status.")
+    @checks.not_blacklisted()
+    async def skvad(self, context: commands.Context):
+        go_command = ['go', 'run', './steamserverinfo.go', '193.25.252.92', '27016']
+        result = subprocess.run(go_command, capture_output=True, text=True)
+        output_lines = result.stdout.strip().split('\n')
+        server_info = {}
+        for line in output_lines:
+            match = re.search(r'(\w+): (.+)', line)
+            if match:
+                key = match.group(1)
+                value = match.group(2)
+                server_info[key] = value
+
+        name = server_info.get("NAME", "")
+        players = server_info.get("PLAYERS", "")
+        max_players = server_info.get("MAXPLAYERS", "")
+        game_map = server_info.get("MAP", "")
+        bots = server_info.get("BOTS", "")
+        ping = server_info.get("PING", "")
+
+        embed = discord.Embed(
+            title='Server Info',
+            description=f"Server {name}",
+            color=0xE02B2B
+        )
+        embed.set_thumbnail(url="https://cdn.discordapp.com/icons/555449815387996171/8f89400a369c987261c6f400a0071091.webp?")
         embed.add_field(
             name="Players",
             value=f'[{players} / {max_players}](https://www.battlemetrics.com/servers/dayz/21395315)'
