@@ -297,6 +297,123 @@ class General(commands.Cog, name="general"):
         await context.message.delete()
         await context.send(embed=embed)
 
+    @commands.hybrid_command(
+        name="chart_d",
+        description="Check if the bot is alive.",
+    )
+    @checks.not_blacklisted()
+    async def chart_c(self, context: Context) -> None:
+        """
+        Check if the bot is alive.
+
+        :param context: The hybrid command context.
+        """
+        embed = discord.Embed(
+            title=f'Rearmed',
+            description=f'Rearmed Armour [chart](https://docs.google.com/spreadsheets/d/1t2FD7XWAgDn9Kou91uqm88OJTZwMS0vi-MUDGQXFdpE/edit#gid=0)',
+            color=0xE02B2B
+        )
+        embed.add_field(
+            name="Armour",
+            value=f'Vanilla Plate Carrier\nJPC Plate Carrier\n6b23 body armour\nEmerson Plate Carrier\nCage Plate Carrier\nAAC Plate Carrier\n6b13 Body armour\nDCS Plater Carrier\nDCS Plater Carrier + Upgrade\n6b43 Ratnik Armour\n6b43 Ratnik Armour + Upgrade'
+        )
+        embed.add_field(
+            name="Hit point",
+            value=f'225\n200\n250\n225\n250\n250\n275\n325\n325\n325\n325'
+        )
+        embed.add_field(
+            name="Health Protection",
+            value=f'70%\n60%\n70%\n70%\n73%\n75%\n75%\n73%\n80%\n78%\n85%'
+        )
+        embed.add_field(
+            name="Armour",
+            value=f'Vanilla Plate Carrier\nJPC Plate Carrier\n6b23 body armour\nEmerson Plate Carrier\nCage Plate Carrier\nAAC Plate Carrier\n6b13 Body armour\nDCS Plater Carrier\nDCS Plater Carrier + Upgrade\n6b43 Ratnik Armour\n6b43 Ratnik Armour + Upgrade'
+        )
+        embed.add_field(
+            name="Shock Protection",
+            value=f'40%\n45%\n73%\n73%\n73%\n73%\n80%\n73%\n83%\n80%\n88%'
+        )
+        embed.add_field(
+            name="Weight (Kg)",
+            value=f'12\n5\n7\n7\n7\n7\n10\n10\n10\n15\n15'
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+        # await context.send(embed=embed)
+        await context.message.delete()
+        await context.send(embed=embed)
+
+    @commands.hybrid_command(
+        name="chart_helmet",
+        description="Check if the bot is alive.",
+    )
+    @checks.not_blacklisted()
+    async def chart_c(self, context: Context) -> None:
+
+        Helmet = [
+            "Ballistic Helmet",
+            "Flight Helmet",
+            "Tanker Helmet",
+            "Fire Fighter Helmet",
+            "Welding Mask",
+            "Combat Helmet",
+            "Enduro Helmet",
+            "Hockey Helmet",
+            "Tactical Helmet",
+            "Assault Helmet",
+            "6B47 Helmet",
+            "LSZH Helmet",
+            "LSZH Helmet + Visor",
+            "Ops Core V2 Helmet",
+            "Ops Core V2 Helmet + Visor",
+            "Fast MT Helmet",
+            "Fast MT Helmet + Visor",
+            "Altyn Helmet",
+            "Altyn Helmet + Visor",
+            "Vulkan-5 Helmet",
+            "Vulkan-5 Helmet + Visor",
+            "Maska Helmet",
+            "Maska Helmet + Visor",
+            "Tagilla Welding Mask"
+        ]
+
+        embed = discord.Embed(
+            title=f'Rearmed',
+            description=f'Rearmed Helmet [chart](https://docs.google.com/spreadsheets/d/1t2FD7XWAgDn9Kou91uqm88OJTZwMS0vi-MUDGQXFdpE/edit#gid=0)',
+            color=0xE02B2B
+        )
+        embed.add_field(
+            name="Helmet",
+            value=f'\n{Helmet}\')'
+        )
+        embed.add_field(
+            name="Hit point",
+            value=f''
+        )
+        embed.add_field(
+            name="Health Protection",
+            value=f''
+        )
+        embed.add_field(
+            name="Armour",
+            value=f''
+        )
+        embed.add_field(
+            name="Shock Protection",
+            value=f''
+        )
+        embed.add_field(
+            name="Weight (Kg)",
+            value=f''
+        )
+        embed.set_footer(
+            text=f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} from ReadyIDC Co., Ltd. Server"
+        )
+        # await context.send(embed=embed)
+        await context.message.delete()
+        await context.send(embed=embed)
+
     @commands.command(name="rearmed", description="Check server status.")
     @checks.not_blacklisted()
     async def rearmed(self, context: commands.Context):
